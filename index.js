@@ -1,5 +1,8 @@
 const inquirer = require('');
 const fs = require('fs');
+const util = require('util');
+
+const writeFileAsync = util.promisify(fs.writeFile)
 
 // array of questions for user
 const questions = () => {
@@ -31,7 +34,7 @@ inquirer
         },
         // What kind of license should your project have?
         {
-            type: 'checkbox',
+            type: 'list',
             message: 'What kind of liscense should your project have?',
             name: 'license',
             choices: ['MIT', 'APACHE 2.0', 'GPL 3.0', 'BSD 3', 'none'],
@@ -60,10 +63,12 @@ inquirer
             name: 'contribute',
             message: 'What does the user need to know about contributing to the repo?',
         },
-    ])
-    .then(function() {
-        console.log(functionname);
-        var README
+    ]).then(function(answer) {
+        console.log(answer);
+        var README = generateMarkdown(answer);
+        writeFileSync ("README.md", README).then(
+            err => console.log("Success!")
+        );
     })
 }
 
