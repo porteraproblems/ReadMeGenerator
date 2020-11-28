@@ -73,13 +73,39 @@ inquirer
 }
 
 // function to write README file
-function writeToFile(fileName, data) {
-}
+function generateMarkdown(answer){
+    var READMEString = 
+    `# ${answer.projectName}
+    [![License](https://img.shields.io/badge/license-apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-// function to initialize program
-function init() {
+    ## Description
 
-}
+    ${answer.projectDescription}
 
-// function call to initialize program
-init();
+    ## Table of Contents
+    * [video](#video)
+    * [installation](#installation)
+    * [usage](#usage)
+    * [license](#license)
+    * [contrubuting](#contributing)
+    * [tests](#tests)
+    * [questions](#questions)
+    * ## Installation
+    ${answer.installDep}
+    ## Usage
+    ![image]
+    ${answer.usingRepo}
+    ## License
+    ${answer.license}
+    ![image]
+    ## Contributing
+    ${answer.contributeRepo}
+    ## Tests
+    ${answer.commandTest}
+    ## Questions
+    If you have any questions about the repo, please open an issue or contact me directly at <${answer.email}>.
+    You can find more of my work at ${answer.gitHubName} .`
+        return(READMEString)
+    }
+    
+    questions();
